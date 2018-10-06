@@ -3,7 +3,7 @@ const webpack = require('webpack');
 
 module.exports = {
   devtool: 'source-map',
-  mode: 'development',
+  // mode: 'development',
   entry: [
     'react-hot-loader/patch',
     'webpack/hot/only-dev-server',
@@ -21,6 +21,11 @@ module.exports = {
     rules: [{
       test: /\.jsx?$/,
       loaders: ['babel-loader'],
+    },
+    {
+      test: /\.css$/,
+      include: [path.join(__dirname, 'client')],
+      use: ['style-loader', 'css-loader', 'postcss-loader']
     }]
   },
   plugins: [

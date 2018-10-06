@@ -10,7 +10,8 @@ import webpack from 'webpack';
 import webpackConfig from './webpack.config';
 import koaWebpack from 'koa-webpack';
 
-import Home from './client/home';
+import index from './routes'
+// import Home from './client/components/home';
 
 const app = new Koa();
 const port = 3000;
@@ -41,13 +42,16 @@ app.use(views(path.resolve(__dirname, './views'),
   { map: { html: 'ejs' } }
 ));
 
-app.use(async (ctx) => {
-  let str = renderToString(<Home />);
-  await ctx.render('index', {
-    root: str
-  });
-  // ctx.body = str;
-});
+// 配置路由
+app.use(index.routes(), index.allowedMethods())
+
+// app.use(async (ctx) => {
+//   let str = renderToString(<Home />);
+//   await ctx.render('index', {
+//     root: str
+//   });
+//   // ctx.body = str;
+// });
 
 app.listen(port, host, (error) => {
   if (error) {

@@ -1,13 +1,15 @@
+import { hydrate } from 'react-dom';
 import React from 'react';
-import ReactDOM, { hydrate } from 'react-dom';
+import AppRouter from './route';
+import { BrowserRouter } from 'react-router-dom';
 
-import Home from './home';
-
-ReactDOM.render(
-  <Home />,
+hydrate(
+  <BrowserRouter basename="/client">
+    <AppRouter />
+  </BrowserRouter>,
   document.getElementById('root')
 );
 
-if (module.hot) {
+if(module.hot) {
   module.hot.accept();
 }
